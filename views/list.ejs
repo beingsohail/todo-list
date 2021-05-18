@@ -1,0 +1,38 @@
+
+<%- include("partials/header.ejs") %> 
+    
+    <div class="container">
+        <div class="list-container">
+
+            <div class="title-div"> <%= page %>  </div>
+            
+            <div class="items">
+
+                <% items.forEach(item => { %>
+                    <div class="list-item-div">
+                        <form class="list-item" action="/delete" method="post">
+                            <input class="checkbox" type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()">
+                            <h2> <%= item.task %>  </h2>
+                            <input type="hidden" name="hiddenInput" value="<%=page%>">
+                        </form>
+                    </div>
+                <% }) %>
+                    
+            </div>
+
+            <form class="list-form" action="/" method="post">
+                <input class="input-item" name="newItem" type="text">
+                <button class="btn btn-item" name="pageList" value="<%=page%>" type="submit">+</button>
+            </form>
+        </div>
+
+        <div class="page-container">
+            <h2>Create or go to relevent todo list</h2>
+            <form action="/page" method="post">
+                <input class="input-page" name="pageName" type="text">
+                <button class="btn btn-page" type="submit">Go</button>
+            </form>
+        </div>
+    </div>
+
+<%- include("partials/footer.ejs") %> 
